@@ -1,5 +1,4 @@
-// src/App.js
-import React from 'react';
+import React, { useState } from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
@@ -9,10 +8,17 @@ import Widget from './components/Widget';
 import Testimonials from './components/Testimonials';
 import ContactForm from './components/ContactForm';
 import ContactInfoWithMap from './components/ContactInfoWithMap';
+import GoogleAuth from './components/GoogleAuth';
+import UpcomingEvents from './components/UpcomingEvents';
 
 function App() {
+  const [accessToken, setAccessToken] = useState('');
+
+  const handleAuth = (token) => {
+    setAccessToken(token);
+  };
+
   return (
-    <ChakraProvider>
       <div className="App">
         <Navbar />
         <HeroSection />
@@ -22,8 +28,9 @@ function App() {
         <Testimonials />
         <ContactForm />
         <ContactInfoWithMap />
+        <GoogleAuth handleAuth={handleAuth} />
+        {accessToken && <UpcomingEvents accessToken={accessToken} />}
       </div>
-    </ChakraProvider>
   );
 }
 

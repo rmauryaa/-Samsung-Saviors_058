@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Flex, HStack, Link, IconButton, useDisclosure, Button, useColorModeValue } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import GoogleAuth from './GoogleAuth'; // Import GoogleAuth component for Google Sign-In
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -29,22 +30,8 @@ const Navbar = () => {
           <Link href="#testimonials">Testimonials</Link>
           <Link href="#contact">Contact</Link>
         </HStack>
-        {/* Login and Signup Buttons */}
-        <HStack spacing={4} display={{ base: 'none', md: 'flex' }}>
-          <Button
-            variant="outline"
-            color="white"
-            _hover={{ color: hoverColor }}
-          >
-            Login
-          </Button>
-          <Button
-            colorScheme="red"
-            _hover={{ backgroundColor: 'red.500' }}
-          >
-            Sign Up
-          </Button>
-        </HStack>
+        {/* Google Sign-In Button */}
+        <GoogleAuth />
       </Flex>
 
       {isOpen ? (
@@ -56,26 +43,10 @@ const Navbar = () => {
             <Link href="#testimonials">Testimonials</Link>
             <Link href="#contact">Contact</Link>
           </HStack>
-          {/* Login and Signup Buttons */}
-          <HStack spacing={4} mt={4} flexDirection="column">
-            <Button
-              variant="outline"
-              color="white"
-              size="sm"
-              width="full"
-              _hover={{ color: hoverColor }}
-            >
-              Login
-            </Button>
-            <Button
-              colorScheme="red"
-              size="sm"
-              width="full"
-              _hover={{ backgroundColor: 'red.500' }}
-            >
-              Sign Up
-            </Button>
-          </HStack>
+          {/* Google Sign-In Button */}
+          <Box mt={4}>
+            <GoogleAuth />
+          </Box>
         </Box>
       ) : null}
     </Box>
