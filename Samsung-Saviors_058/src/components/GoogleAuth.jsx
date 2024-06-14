@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Flex } from '@chakra-ui/react';
 import { useToast } from '@chakra-ui/react';
 import { signInWithGoogle, signOutFromGoogle } from '../services/authService';
 
 const GoogleAuth = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const toast = useToast();
 
   const handleGoogleSignIn = async () => {
     try {
       const user = await signInWithGoogle();
+      setIsLoggedIn(true);
       // Display success toast message
       toast({
         title: "Successfully signed in",
@@ -32,6 +34,7 @@ const GoogleAuth = () => {
   const handleGoogleSignOut = async () => {
     try {
       await signOutFromGoogle();
+      setIsLoggedIn(false);
       // Display success toast message
       toast({
         title: "Signed out",
@@ -54,23 +57,27 @@ const GoogleAuth = () => {
 
   return (
     <Flex alignItems="center">
-      <Button
-        onClick={handleGoogleSignIn}
-        variant="outline"
-        colorScheme="green"
-        size="sm"
-        marginRight="10px"
-      >
-        Sign In with Google
-      </Button>
-      <Button
-        onClick={handleGoogleSignOut}
-        variant="outline"
-        colorScheme="red"
-        size="sm"
-      >
-        Sign Out
-      </Button>
+      {!isLoggedIn && (
+        <Button
+          onClick={handleGoogleSignIn}
+          variant="outline"
+          colorScheme="green"
+          size="sm"
+          marginRight="10px"
+        >
+          Sign In with Google
+        </Button>
+      )}
+      {isLoggedIn && (
+        <Button
+          onClick={handleGoogleSignOut}
+          variant="outline"
+          colorScheme="red"
+          size="sm"
+        >
+          Sign Out
+        </Button>
+      )}
     </Flex>
   );
 };
