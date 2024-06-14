@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Box, Flex, HStack, Link, IconButton, useDisclosure, Button, useColorModeValue } from '@chakra-ui/react';
+import React from 'react';
+import { Box, Flex, HStack, Link, IconButton, useDisclosure, useColorModeValue } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import GoogleAuth from './GoogleAuth'; // Import GoogleAuth component for Google Sign-In
+import GoogleAuth from './GoogleAuth'; // Assuming GoogleAuth is in the same directory
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -30,11 +30,11 @@ const Navbar = () => {
           <Link href="#testimonials">Testimonials</Link>
           <Link href="#contact">Contact</Link>
         </HStack>
-        {/* Google Sign-In Button */}
+        {/* GoogleAuth Component */}
         <GoogleAuth />
       </Flex>
 
-      {isOpen ? (
+      {isOpen && (
         <Box pb={4} display={{ md: 'none' }}>
           <HStack as="nav" spacing={4} color="white" flexDirection="column">
             <Link href="#home">Home</Link>
@@ -43,12 +43,10 @@ const Navbar = () => {
             <Link href="#testimonials">Testimonials</Link>
             <Link href="#contact">Contact</Link>
           </HStack>
-          {/* Google Sign-In Button */}
-          <Box mt={4}>
-            <GoogleAuth />
-          </Box>
+          {/* GoogleAuth Component */}
+          <GoogleAuth />
         </Box>
-      ) : null}
+      )}
     </Box>
   );
 };

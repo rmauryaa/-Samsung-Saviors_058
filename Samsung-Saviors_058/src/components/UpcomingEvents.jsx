@@ -1,31 +1,46 @@
-/* global gapi */
-import React, { useState, useEffect } from 'react';
-import { Box, Text, List, ListItem } from '@chakra-ui/react';
-import { listUpcomingEvents } from '../utils/calendarUtils';
+// // components/UpcomingEvents.jsx
+import React, { useEffect, useState } from 'react';
 
 const UpcomingEvents = ({ accessToken }) => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch events');
+        }
+
+        const data = await response.json();
+        setEvents(data.items);
+      } catch (error) {
+        console.error('Error fetching events:', error);
+      }
+    };
+
     if (accessToken) {
-      listUpcomingEvents().then((events) => {
-        setEvents(events);
-      });
+      fetchEvents();
     }
   }, [accessToken]);
 
   return (
-    <Box>
-      <Text fontSize="xl" fontWeight="bold">Upcoming Events</Text>
-      <List spacing={3}>
+    <div>
+      <h2>Upcoming Events</h2>
+      <ul>
         {events.map((event) => (
-          <ListItem key={event.id}>
-            <Text fontSize="lg">{event.summary}</Text>
-            <Text>{new Date(event.start.dateTime).toLocaleString()}</Text>
-          </ListItem>
+          <li key={event.id}>
+            <strong>{event.summary}</strong> - {event.start.dateTime || event.start.date}
+          </li>
         ))}
-      </List>
-    </Box>
+      </ul>
+    </div>
   );
 };
 
