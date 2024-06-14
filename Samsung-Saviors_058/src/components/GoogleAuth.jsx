@@ -1,47 +1,76 @@
-import React, { useEffect } from 'react';
-import { Button, Box, Flex } from '@chakra-ui/react';
-import { gapiLoaded, gisLoaded, handleAuthClick, handleSignoutClick } from '../google';
+import React from 'react';
+import { Button, Flex } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
+import { signInWithGoogle, signOutFromGoogle } from '../services/authService';
 
 const GoogleAuth = () => {
-  useEffect(() => {
-    // Load Google API script
-    const gapiScript = document.createElement('script');
-    gapiScript.src = 'https://apis.google.com/js/api.js';
-    gapiScript.onload = gapiLoaded;
-    document.body.appendChild(gapiScript);
+  const toast = useToast();
 
-    // Load Google Identity Services script
-    const gisScript = document.createElement('script');
-    gisScript.src = 'https://accounts.google.com/gsi/client';
-    gisScript.onload = gisLoaded;
-    document.body.appendChild(gisScript);
-  }, []);
+  const handleGoogleSignIn = async () => {
+    try {
+      const user = await signInWithGoogle();
+      // Display success toast message
+      toast({
+        title: "Successfully signed in",
+        description: `Welcome, ${user.displayName}!`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error) {
+      console.error("Error signing in with Google", error);
+      toast({
+        title: "Error signing in",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const handleGoogleSignOut = async () => {
+    try {
+      await signOutFromGoogle();
+      // Display success toast message
+      toast({
+        title: "Signed out",
+        description: "You have successfully signed out.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error) {
+      console.error("Error signing out from Google", error);
+      toast({
+        title: "Error signing out",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  };
 
   return (
     <Flex alignItems="center">
       <Button
-        id="authorize_button"
-        onClick={handleAuthClick}
-        style={{ visibility: 'hidden', marginRight: '10px' }}
+        onClick={handleGoogleSignIn}
         variant="outline"
         colorScheme="green"
         size="sm"
+        marginRight="10px"
       >
         Sign In with Google
       </Button>
       <Button
-        id="signout_button"
-        onClick={handleSignoutClick}
-        style={{ visibility: 'hidden' }}
+        onClick={handleGoogleSignOut}
         variant="outline"
         colorScheme="red"
         size="sm"
       >
         Sign Out
       </Button>
-      <Box ml={4}>
-        <pre id="content" style={{ whiteSpace: 'pre-wrap' }}></pre>
-      </Box>
     </Flex>
   );
 };
