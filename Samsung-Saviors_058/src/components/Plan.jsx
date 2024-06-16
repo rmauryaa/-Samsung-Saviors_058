@@ -1,5 +1,7 @@
+// src/components/Plan.jsx
 import React from 'react';
-import { Box, Text, Image, VStack, Divider } from "@chakra-ui/react";
+import { Box, Text, Image, VStack, Divider, Button } from "@chakra-ui/react";
+import { Link } from 'react-router-dom';
 
 const Plan = () => {
   return (
@@ -36,6 +38,9 @@ const Plan = () => {
           <Text fontSize="md">
             Turn Cancelled Plans into New Opportunities
           </Text>
+          <Link to="/calendar">
+            <Button colorScheme="teal" mt={4}>Choose Dates</Button>
+          </Link>
         </VStack>
       </Box>
     </Box>
