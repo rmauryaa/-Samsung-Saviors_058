@@ -1,17 +1,15 @@
 // src/services/authService.js
-import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
-import { doc, setDoc, getDocs, collection, query, updateDoc } from "firebase/firestore";
+import { signInWithPopup, GoogleAuthProvider, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
+import { doc, setDoc, getDocs, collection, query } from "firebase/firestore";
 import { auth, db } from './firebase';
 
 const provider = new GoogleAuthProvider();
 
 export const signInWithGoogle = async () => {
   try {
+    await setPersistence(auth, browserLocalPersistence);  // Set persistence to local
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
-
-    // Debugging: Log user information
-    console.log("User information: ", user);
 
     // Store user information in Firestore
     const userRef = doc(db, 'users', user.uid);
@@ -56,5 +54,11 @@ export const getTrips = async () => {
   const tripsQuery = query(collection(db, 'users', user.uid, 'trips'));
   const tripDocs = await getDocs(tripsQuery);
 
-  return tripDocs.docs.map(doc => ({ date: new Date(doc.data().date), ...doc.data() }));
+  return tripDocs.docs.map(doc => {
+    const data = doc.data();
+    return {
+      ...data,
+      date: new Date(data.date) // Ensure date is a Date object
+    };
+  });
 };

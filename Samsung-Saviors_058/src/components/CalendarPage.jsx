@@ -2,20 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import {
-  Box,
-  Button,
-  VStack,
-  Text,
-  Heading,
-  Spinner,
-  Center,
-  Input,
-  Textarea,
-  FormControl,
-  FormLabel,
-  useToast,
-} from '@chakra-ui/react';
+import { Box, Button, VStack, Text, Heading, Spinner, Center, Input, Textarea, FormControl, FormLabel, useToast } from '@chakra-ui/react';
 import { addTrip, getTrips } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,7 +10,7 @@ const CalendarPage = () => {
   const [date, setDate] = useState(new Date());
   const [selectedDates, setSelectedDates] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [tripDetails, setTripDetails] = useState({ destination: '', hotel: '', time: '', itinerary: '' });
+  const [tripDetails, setTripDetails] = useState({ destination: '', hotel: '', startTime: '', endTime: '', budget: '', itinerary: '' });
   const [isFormVisible, setFormVisible] = useState(false);
   const toast = useToast();
   const navigate = useNavigate();
@@ -36,9 +23,9 @@ const CalendarPage = () => {
       } catch (error) {
         console.error(error);
         toast({
-          title: 'Authentication required',
-          description: 'Please sign in to manage your trips.',
-          status: 'error',
+          title: "Authentication required",
+          description: "Please sign in to manage your trips.",
+          status: "error",
           duration: 5000,
           isClosable: true,
         });
@@ -52,8 +39,8 @@ const CalendarPage = () => {
 
   const handleDateChange = (newDate) => {
     setDate(newDate);
-    const existingTrip = selectedDates.find(d => d.date instanceof Date && d.date.toDateString() === newDate.toDateString());
-    setTripDetails(existingTrip ? existingTrip : { destination: '', hotel: '', time: '', itinerary: '' });
+    const existingTrip = selectedDates.find(d => d.date.toDateString() === newDate.toDateString());
+    setTripDetails(existingTrip ? existingTrip : { destination: '', hotel: '', startTime: '', endTime: '', budget: '', itinerary: '' });
     setFormVisible(true);
   };
 
@@ -62,9 +49,9 @@ const CalendarPage = () => {
       await addTrip(date, tripDetails);
       setSelectedDates([...selectedDates, { date, ...tripDetails }]);
       toast({
-        title: 'Trip saved',
+        title: "Trip saved",
         description: `Your trip for ${date.toDateString()} has been saved.`,
-        status: 'success',
+        status: "success",
         duration: 5000,
         isClosable: true,
       });
@@ -72,9 +59,9 @@ const CalendarPage = () => {
     } catch (error) {
       console.error(error);
       toast({
-        title: 'Error saving trip',
+        title: "Error saving trip",
         description: error.message,
-        status: 'error',
+        status: "error",
         duration: 5000,
         isClosable: true,
       });
@@ -92,24 +79,24 @@ const CalendarPage = () => {
   return (
     <Box p={4} maxWidth="1200px" mx="auto">
       <VStack spacing={4}>
-        <Heading as="h2" size="xl" mb={4}>
-          Select Your Travel Dates
-        </Heading>
+        <Heading as="h2" size="xl" mb={4}>Select Your Travel Dates</Heading>
         <Calendar
           onChange={handleDateChange}
           value={date}
           tileClassName={({ date }) =>
-            selectedDates.find(d => d.date instanceof Date && d.date.toDateString() === date.toDateString()) ? 'selected' : null
+            selectedDates.find(d => d.date.toDateString() === date.toDateString()) ? 'selected' : null
           }
         />
         {isFormVisible && (
-          <Box width="100%" mt={4} p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
+          <Box width="100%" mt={4} p={4} borderWidth="1px" borderRadius="md" boxShadow="md" bg="gray.800" color="white">
             <FormControl mb={4}>
               <FormLabel>Destination</FormLabel>
               <Input
                 value={tripDetails.destination}
                 onChange={(e) => setTripDetails({ ...tripDetails, destination: e.target.value })}
                 placeholder="Enter your destination"
+                bg="gray.700"
+                color="white"
               />
             </FormControl>
             <FormControl mb={4}>
@@ -118,14 +105,38 @@ const CalendarPage = () => {
                 value={tripDetails.hotel}
                 onChange={(e) => setTripDetails({ ...tripDetails, hotel: e.target.value })}
                 placeholder="Enter your hotel"
+                bg="gray.700"
+                color="white"
               />
             </FormControl>
             <FormControl mb={4}>
-              <FormLabel>Time</FormLabel>
+              <FormLabel>Start Time</FormLabel>
               <Input
-                value={tripDetails.time}
-                onChange={(e) => setTripDetails({ ...tripDetails, time: e.target.value })}
-                placeholder="Enter the time of your trip"
+                value={tripDetails.startTime}
+                onChange={(e) => setTripDetails({ ...tripDetails, startTime: e.target.value })}
+                placeholder="Enter the start time"
+                bg="gray.700"
+                color="white"
+              />
+            </FormControl>
+            <FormControl mb={4}>
+              <FormLabel>End Time</FormLabel>
+              <Input
+                value={tripDetails.endTime}
+                onChange={(e) => setTripDetails({ ...tripDetails, endTime: e.target.value })}
+                placeholder="Enter the end time"
+                bg="gray.700"
+                color="white"
+              />
+            </FormControl>
+            <FormControl mb={4}>
+              <FormLabel>Travel Budget</FormLabel>
+              <Input
+                value={tripDetails.budget}
+                onChange={(e) => setTripDetails({ ...tripDetails, budget: e.target.value })}
+                placeholder="Enter your travel budget"
+                bg="gray.700"
+                color="white"
               />
             </FormControl>
             <FormControl mb={4}>
@@ -134,19 +145,14 @@ const CalendarPage = () => {
                 value={tripDetails.itinerary}
                 onChange={(e) => setTripDetails({ ...tripDetails, itinerary: e.target.value })}
                 placeholder="Enter your trip itinerary here..."
+                bg="gray.700"
+                color="white"
               />
             </FormControl>
-            <Button colorScheme="teal" onClick={handleSaveTrip}>
-              Save Trip
-            </Button>
+            <Button colorScheme="teal" onClick={handleSaveTrip}>Save Trip</Button>
           </Box>
         )}
-        <Button colorScheme="teal" onClick={() => navigate('/my-trips')}>
-          View My Trips
-        </Button>
-        <Button colorScheme="teal" onClick={() => navigate('/')}>
-          Back to Plan
-        </Button>
+        <Button colorScheme="teal" onClick={() => navigate('/')}>Back to Plan</Button>
       </VStack>
     </Box>
   );
