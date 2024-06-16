@@ -8,9 +8,13 @@ const Navbar = () => {
   const hoverColor = useColorModeValue('gray.800', 'gray.100'); // Adjust hover color based on color mode
 
   return (
-    <Box bg="gray.900" px={4}>
+    <Box bg="gray.900" px={4} pos="fixed" w="100%" zIndex="999">
       <Flex h={16} alignItems="center" justifyContent="space-between">
-        <Box fontSize="2xl" fontWeight="bold" color="white">Weekend Planner</Box>
+        <Link href="#" _hover={{ textDecoration: 'none' }}>
+          <Box fontSize="2xl" fontWeight="bold" color="white">
+            Weekend Planner
+          </Box>
+        </Link>
         <IconButton
           size="md"
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
