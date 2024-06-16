@@ -1,9 +1,29 @@
 // src/components/Plan.jsx
 import React from 'react';
 import { Box, Text, Image, VStack, Divider, Button } from "@chakra-ui/react";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useToast } from '@chakra-ui/react';
+import { auth } from '../services/firebase';
 
 const Plan = () => {
+  const navigate = useNavigate();
+  const toast = useToast();
+
+  const handleChooseDates = () => {
+    if (!auth.currentUser) {
+      toast({
+        title: "Authentication required",
+        description: "Please sign in to choose dates.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return; // Prevent navigation
+    } else {
+      navigate('/calendar');
+    }
+  };
+
   return (
     <Box position="relative" width="100%" height="400px">
       <Image
@@ -38,9 +58,7 @@ const Plan = () => {
           <Text fontSize="md">
             Turn Cancelled Plans into New Opportunities
           </Text>
-          <Link to="/calendar">
-            <Button colorScheme="teal" mt={4}>Choose Dates</Button>
-          </Link>
+          <Button colorScheme="teal" mt={4} onClick={handleChooseDates}>Choose Dates</Button>
         </VStack>
       </Box>
     </Box>
