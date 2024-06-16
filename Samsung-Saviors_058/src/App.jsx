@@ -1,6 +1,7 @@
-// App.jsx
+// src/App.jsx
 import React, { useEffect, useState } from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import AboutUs from './components/AboutUs';
@@ -10,6 +11,8 @@ import Testimonials from './components/Testimonials';
 import ContactForm from './components/ContactForm';
 import ContactInfoWithMap from './components/ContactInfoWithMap';
 import UpcomingEvents from './components/UpcomingEvents';
+import CalendarPage from './components/CalendarPage';
+import MyTripsPage from './components/MyTripsPage';
 
 function App() {
   const [accessToken, setAccessToken] = useState('');
@@ -37,27 +40,35 @@ function App() {
 
   return (
     <ChakraProvider>
-      <div className="App">
+      <Router>
         <Navbar isLoggedIn={isLoggedIn} onLogin={handleAuth} onLogout={handleLogout} />
-        <div id="home">
-          <HeroSection />
-        </div>
-        <div id="about">
-          <AboutUs />
-        </div>
-        <div id="services">
-          <Plan />
-          <Widget />
-        </div>
-        <div id="testimonials">
-          <Testimonials />
-        </div>
-        <div id="contact">
-          <ContactForm />
-          <ContactInfoWithMap />
-        </div>
-        {accessToken && <UpcomingEvents accessToken={accessToken} />}
-      </div>
+        <Routes>
+          <Route path="/" element={
+            <div>
+              <div id="home">
+                <HeroSection />
+              </div>
+              <div id="about">
+                <AboutUs />
+              </div>
+              <div id="services">
+                <Plan />
+                <Widget />
+              </div>
+              <div id="testimonials">
+                <Testimonials />
+              </div>
+              <div id="contact">
+                <ContactForm />
+                <ContactInfoWithMap />
+              </div>
+              {accessToken && <UpcomingEvents accessToken={accessToken} />}
+            </div>
+          } />
+          <Route path="/calendar" element={<CalendarPage />} />
+          <Route path="/my-trips" element={<MyTripsPage />} />
+        </Routes>
+      </Router>
     </ChakraProvider>
   );
 }
