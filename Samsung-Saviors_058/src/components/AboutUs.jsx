@@ -1,10 +1,30 @@
 import React from 'react';
 import { Box, Flex, Image, Text, Heading, Divider } from '@chakra-ui/react';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 const AboutUs = () => {
+  const controls = useAnimation();
+  const { ref, inView } = useInView({ triggerOnce: true });
+
+  React.useEffect(() => {
+    if (inView) {
+      controls.start({ opacity: 1, y: 0 });
+    }
+  }, [controls, inView]);
+
   return (
-    <Flex direction={{ base: 'column', md: 'row' }} p={5} bg="gray.50">
-      <Box flex="1">
+    <Flex
+      ref={ref}
+      direction={{ base: 'column', md: 'row' }}
+      p={5}
+      bg="gray.50"
+      as={motion.div}
+      initial={{ opacity: 0, y: 50 }}
+      animate={controls}
+      transition={{ duration: 0.5 }}
+    >
+      <Box flex="1" as={motion.div} whileHover={{ scale: 1.05 }}>
         <Image
           src="https://images.squarespace-cdn.com/content/v1/5b420b8c1aef1dea2e4f205b/9f24711c-f728-4c01-a296-8171df6d1a36/Leap+Day.jpg?format=1500w"
           alt="Notebook and coffee"

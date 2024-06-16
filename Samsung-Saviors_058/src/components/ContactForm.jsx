@@ -16,6 +16,8 @@ import {
   ModalFooter,
   useDisclosure,
 } from '@chakra-ui/react';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 const ContactForm = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -24,20 +26,39 @@ const ContactForm = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
+  const controls = useAnimation();
+  const { ref, inView } = useInView({ triggerOnce: true });
+
+  React.useEffect(() => {
+    if (inView) {
+      controls.start({ opacity: 1, y: 0 });
+    }
+  }, [controls, inView]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Form validation
     if (name.trim() === '' || phone.trim() === '' || email.trim() === '' || message.trim() === '') {
       alert('Please fill in all fields.');
       return;
     }
-    // Additional form submission logic can go here
-    // For demonstration, just opening the modal
     onOpen();
   };
 
   return (
-    <Box bg="gray.20" p={8} rounded="md" shadow="md" maxW="800px" mx="auto" my={10}>
+    <Box
+      ref={ref}
+      bg="gray.20"
+      p={8}
+      rounded="md"
+      shadow="md"
+      maxW="800px"
+      mx="auto"
+      my={10}
+      as={motion.div}
+      initial={{ opacity: 0, y: 50 }}
+      animate={controls}
+      transition={{ duration: 0.5 }}
+    >
       <Heading as="h2" size="xl" textAlign="center" mb={4}>
         CONTACT
       </Heading>
@@ -60,12 +81,11 @@ const ContactForm = () => {
           <FormLabel>Message</FormLabel>
           <Textarea placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)} />
         </FormControl>
-        <Button type="submit" colorScheme="red" width="full">
+        <Button type="submit" colorScheme="red" width="full" as={motion.button} whileHover={{ scale: 1.05 }}>
           CONTACT US
         </Button>
       </form>
 
-      {/* Modal for Success Message */}
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent borderRadius="md" bg="white" p={4}>

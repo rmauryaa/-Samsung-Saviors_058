@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Flex, Text, Image, Heading, Stack } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
+import { motion } from 'framer-motion';
 
 const testimonials = [
   {
@@ -19,29 +20,70 @@ const testimonials = [
     name: 'Alice Johnson',
     title: 'Casual Traveler',
     image: 'https://i.insider.com/63f5f1ff88f76900192cca6a?width=1136&format=jpeg',
-    quote: 'Perfect for spontaneous trips! It makes planning effortless.',
+    quote: 'Perfect for spontaneous trips! It made everything so easy.',
   },
 ];
 
 const Testimonials = () => {
   return (
-    <Box py={10} px={5}>
-      <Heading as="h2" textAlign="center" mb={10}>
-        TESTIMONIALS
+    <Box
+      p={8}
+      bg="gray.50"
+      borderRadius="md"
+      maxW="1200px"
+      mx="auto"
+      as={motion.div}
+      initial={{ y: 30, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <Heading as="h2" size="xl" textAlign="center" mb={4}>
+        Testimonials
       </Heading>
-      <Flex justify="space-around" flexWrap="wrap">
+      <Box borderBottomWidth="2px" borderColor="red.500" width="60px" mx="auto" mb={8} />
+      <Flex
+        direction={{ base: 'column', md: 'row' }}
+        justify="space-around"
+        align="center"
+        as={motion.div}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ staggerChildren: 0.3 }}
+      >
         {testimonials.map((testimonial, index) => (
-          <Box key={index} maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" m={5} p={5} textAlign="center" boxShadow="md" bg="gray.50">
-            <Text fontSize="xl" fontStyle="italic" mb={4}>
-              &ldquo; {testimonial.quote} &rdquo;
-            </Text>
-            <Image borderRadius="md" boxSize="150px" src={testimonial.image} alt={testimonial.name} mx="auto" mb={4} objectFit="cover" />
-            <Text fontWeight="bold" fontSize="lg" mb={1}>{testimonial.name}</Text>
-            <Text fontSize="sm" color="gray.500">{testimonial.title}</Text>
-            <Stack direction="row" justify="center" mt={2} spacing={1}>
-              {Array(5).fill('').map((_, i) => (
-                <StarIcon key={i} color="yellow.500" />
-              ))}
+          <Box
+            key={index}
+            bg="white"
+            p={6}
+            m={4}
+            borderRadius="md"
+            shadow="md"
+            maxW="350px"
+            as={motion.div}
+            whileHover={{ scale: 1.05 }}
+          >
+            <Image
+              borderRadius="full"
+              boxSize="100px"
+              src={testimonial.image}
+              alt={testimonial.name}
+              mx="auto"
+            />
+            <Stack spacing={3} mt={4} textAlign="center">
+              <Heading as="h3" size="md">
+                {testimonial.name}
+              </Heading>
+              <Text fontSize="sm" color="gray.500">
+                {testimonial.title}
+              </Text>
+              <Flex justifyContent="center" mt={2}>
+                {[...Array(5)].map((_, i) => (
+                  <StarIcon key={i} color="yellow.500" />
+                ))}
+              </Flex>
+              <Text mt={2} fontStyle="italic">
+                "{testimonial.quote}"
+              </Text>
             </Stack>
           </Box>
         ))}
