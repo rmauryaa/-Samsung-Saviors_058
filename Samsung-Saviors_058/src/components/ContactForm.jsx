@@ -44,6 +44,15 @@ const ContactForm = () => {
     onOpen();
   };
 
+  const handleCloseModal = () => {
+    onClose();
+    // Reset form fields
+    setName('');
+    setPhone('');
+    setEmail('');
+    setMessage('');
+  };
+
   return (
     <Box
       ref={ref}
@@ -86,7 +95,7 @@ const ContactForm = () => {
         </Button>
       </form>
 
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <Modal isOpen={isOpen} onClose={handleCloseModal} isCentered>
         <ModalOverlay />
         <ModalContent borderRadius="md" bg="white" p={4}>
           <ModalHeader textAlign="center" borderBottomWidth="1px">
@@ -101,7 +110,7 @@ const ContactForm = () => {
             </Box>
           </ModalBody>
           <ModalFooter justifyContent="center">
-            <Button colorScheme="blue" onClick={onClose} mr={3}>
+            <Button colorScheme="blue" onClick={handleCloseModal} mr={3}>
               Close
             </Button>
           </ModalFooter>
