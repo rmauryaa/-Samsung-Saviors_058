@@ -1,7 +1,7 @@
 // src/services/authService.js
 import { signInWithPopup, GoogleAuthProvider, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
-import { doc, setDoc, getDocs, collection, query, updateDoc, deleteDoc } from "firebase/firestore";
-import { auth, db } from './firebase';
+import { doc, setDoc, getDoc, collection, query, getDocs, updateDoc, deleteDoc } from "firebase/firestore";
+import { auth, db } from './firebase'; // Adjust path as per your project structure
 
 const provider = new GoogleAuthProvider();
 
@@ -36,22 +36,25 @@ export const signOutFromGoogle = async () => {
   }
 };
 
-export const addTrip = async (date, tripDetails) => {
-  const user = auth.currentUser;
-  if (!user) throw new Error("User not authenticated");
+export const fetchUserData = async (userId) => {
+  try {
+    const userRef = doc(db, 'users', userId);
+    const userDoc = await getDoc(userRef);
 
-  const dateRef = doc(db, 'users', user.uid, 'trips', date.toISOString());
-  await setDoc(dateRef, {
-    date: date.toISOString(),
-    ...tripDetails
-  });
+    if (userDoc.exists()) {
+      return userDoc.data();
+    } else {
+      console.log("No such document!");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
 };
 
-export const getTrips = async () => {
-  const user = auth.currentUser;
-  if (!user) throw new Error("User not authenticated");
-
-  const tripsQuery = query(collection(db, 'users', user.uid, 'trips'));
+export const getTrips = async (userId) => {
+  const tripsQuery = query(collection(db, 'users', userId, 'trips'));
   const tripDocs = await getDocs(tripsQuery);
 
   return tripDocs.docs.map(doc => {
@@ -60,6 +63,17 @@ export const getTrips = async () => {
       ...data,
       date: new Date(data.date) // Ensure date is a Date object
     };
+  });
+};
+
+export const addTrip = async (date, tripDetails) => {
+  const user = auth.currentUser;
+  if (!user) throw new Error("User not authenticated");
+
+  const dateRef = doc(db, 'users', user.uid, 'trips', date.toISOString());
+  await setDoc(dateRef, {
+    date: date.toISOString(),
+    ...tripDetails
   });
 };
 

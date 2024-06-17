@@ -1,0 +1,41 @@
+/* src/styles/Dashboard.css */
+.dashboard-container {
+    position: relative;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  }
+  
+  .dashboard-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSanJgmMj7RQ90DcxiBcAU2Sn8hw_QT7AsOXQ&s');
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
+    z-index: -1; /* Ensure background is behind the content */
+  }
+  
+  .dashboard-content {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    backdrop-filter: none; /* Ensure content is not blurred */
+  }
+  
+  .dashboard-heading {
+    background: rgba(236, 201, 75, 0.8);
+    padding: 10px 20px;
+    border-radius: 9px;
+    display: inline-block;
+  }
+  
+  .chart-box {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8);
+  }
+  
