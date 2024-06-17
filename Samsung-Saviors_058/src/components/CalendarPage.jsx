@@ -1,4 +1,3 @@
-// src/components/CalendarPage.jsx
 import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -134,11 +133,11 @@ const CalendarPage = () => {
                 />
               </FormControl>
               <FormControl mb={4}>
-                <FormLabel>Travel Budget</FormLabel>
+                <FormLabel>Budget</FormLabel>
                 <Input
                   value={tripDetails.budget}
                   onChange={(e) => setTripDetails({ ...tripDetails, budget: e.target.value })}
-                  placeholder="Enter your travel budget"
+                  placeholder="Enter your budget"
                   bg="gray.700"
                   color="white"
                 />
@@ -148,15 +147,14 @@ const CalendarPage = () => {
                 <Textarea
                   value={tripDetails.itinerary}
                   onChange={(e) => setTripDetails({ ...tripDetails, itinerary: e.target.value })}
-                  placeholder="Enter your trip itinerary here..."
+                  placeholder="Enter your itinerary"
                   bg="gray.700"
                   color="white"
                 />
               </FormControl>
-              <Button colorScheme="teal" onClick={handleSaveTrip}>Save Trip</Button>
+              <Button colorScheme="blue" onClick={handleSaveTrip}>Save Trip</Button>
             </Box>
           )}
-          <Button colorScheme="teal" onClick={() => navigate('/')}>Back to Plan</Button>
         </VStack>
       </Box>
     </Box>

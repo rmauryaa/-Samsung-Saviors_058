@@ -4,6 +4,7 @@ import { Box, Flex, HStack, IconButton, useDisclosure, useColorModeValue } from 
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import GoogleAuth from './GoogleAuth';
 import { Link as ScrollLink } from 'react-scroll';
+import { Link as RouterLink } from 'react-router-dom';
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -12,11 +13,11 @@ const Navbar = () => {
   return (
     <Box bg="gray.900" px={6} pos="fixed" w="100%" zIndex="999">
       <Flex h={16} alignItems="center" justifyContent="space-between">
-        <ScrollLink to="home" smooth={true} duration={500}>
+        <RouterLink to="/" style={{ textDecoration: 'none' }}>
           <Box fontSize="2xl" fontWeight="bold" color="white" cursor="pointer">
             Weekend Planner
           </Box>
-        </ScrollLink>
+        </RouterLink>
         <IconButton
           size="md"
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}

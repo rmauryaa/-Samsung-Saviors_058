@@ -1,4 +1,3 @@
-// src/services/authService.js
 import { signInWithPopup, GoogleAuthProvider, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { doc, setDoc, getDoc, collection, query, getDocs, updateDoc, deleteDoc } from "firebase/firestore";
 import { auth, db } from './firebase'; // Adjust path as per your project structure
@@ -54,16 +53,28 @@ export const fetchUserData = async (userId) => {
 };
 
 export const getTrips = async (userId) => {
-  const tripsQuery = query(collection(db, 'users', userId, 'trips'));
-  const tripDocs = await getDocs(tripsQuery);
+  try {
+    // Retrieve the current user if userId is not provided
+    if (!userId) {
+      const user = auth.currentUser;
+      if (!user) throw new Error("User not authenticated");
+      userId = user.uid;
+    }
+    
+    const tripsQuery = query(collection(db, 'users', userId, 'trips'));
+    const tripDocs = await getDocs(tripsQuery);
 
-  return tripDocs.docs.map(doc => {
-    const data = doc.data();
-    return {
-      ...data,
-      date: new Date(data.date) // Ensure date is a Date object
-    };
-  });
+    return tripDocs.docs.map(doc => {
+      const data = doc.data();
+      return {
+        ...data,
+        date: new Date(data.date) // Ensure date is a Date object
+      };
+    });
+  } catch (error) {
+    console.error("Error fetching trips:", error);
+    throw error;
+  }
 };
 
 export const addTrip = async (date, tripDetails) => {
