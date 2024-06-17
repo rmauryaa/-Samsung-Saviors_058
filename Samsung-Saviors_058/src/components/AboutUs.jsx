@@ -24,14 +24,16 @@ const AboutUs = () => {
       animate={controls}
       transition={{ duration: 0.5 }}
     >
-      <Box flex="1" as={motion.div} whileHover={{ scale: 1.05 }}>
+      <Box flex="1" >
         <Image
           src="https://images.squarespace-cdn.com/content/v1/5b420b8c1aef1dea2e4f205b/9f24711c-f728-4c01-a296-8171df6d1a36/Leap+Day.jpg?format=1500w"
           alt="Notebook and coffee"
           borderRadius="md"
           objectFit="cover"
-          w="100%"
-          h="100%"
+          w="90%"
+          h="90%"
+          ml="20px"
+          mt="25px"
         />
       </Box>
       <Box flex="1" p={5} bg="gray.100" borderRadius="md">
