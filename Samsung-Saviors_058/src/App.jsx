@@ -12,12 +12,15 @@ import Testimonials from "./components/Testimonials";
 import ContactForm from "./components/ContactForm";
 import ContactInfoWithMap from "./components/ContactInfoWithMap";
 import UpcomingEvents from "./components/UpcomingEvents";
-import CalendarPage from "./components/CalendarPage"; // Make sure to import CalendarPage correctly
+import CalendarPage from "./components/CalendarPage";
 import { auth } from "./services/firebase";
 import { signOutFromGoogle } from "./services/authService";
 import ServiceCard1 from "./pages/ServiceCard1";
 import ServiceCard2 from "./pages/ServiceCard2";
 import ServiceCard3 from "./pages/ServiceCard3";
+import { Element } from 'react-scroll';
+import { Fade, Slide, Zoom, Bounce } from 'react-awesome-reveal';
+// import './styles/App.css'; // Make sure to import your CSS for the background
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -45,24 +48,40 @@ function App() {
             path="/"
             element={
               <div>
-                <div id="home">
-                  <HeroSection />
-                </div>
-                <div id="about">
-                  <AboutUs />
-                </div>
-                <div id="services">
-                  <Plan />
-                  <Widget />
-                </div>
-                <div id="testimonials">
-                  <Testimonials />
-                </div>
-                <div id="contact">
-                  <ContactForm />
-                  <ContactInfoWithMap />
-                </div>
-                {isLoggedIn && <UpcomingEvents />}
+                <Element name="home" id="home">
+                  <Fade>
+                    <HeroSection />
+                  </Fade>
+                </Element>
+                <Element name="about" id="about">
+                  <Slide direction="left">
+                    <AboutUs />
+                  </Slide>
+                </Element>
+                <Element name="services" id="services">
+                  <Zoom>
+                    <Plan />
+                    <Widget />
+                  </Zoom>
+                </Element>
+                <Element name="testimonials" id="testimonials">
+                  <Bounce>
+                    <Testimonials />
+                  </Bounce>
+                </Element>
+                <Element name="contact" id="contact">
+                  <Slide direction="right">
+                    <ContactForm />
+                    <ContactInfoWithMap />
+                  </Slide>
+                </Element>
+                {isLoggedIn && (
+                  <Element name="events" id="events">
+                    <Fade>
+                      <UpcomingEvents />
+                    </Fade>
+                  </Element>
+                )}
               </div>
             }
           />

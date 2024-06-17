@@ -32,7 +32,7 @@ const UpcomingEvents = ({ accessToken }) => {
 
   return (
     <div>
-      <h2>Upcoming Events</h2>
+      {/* <h2>Upcoming Events</h2> */}
       <ul>
         {events.map((event) => (
           <li key={event.id}>
