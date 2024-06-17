@@ -12,7 +12,7 @@ import Testimonials from "./components/Testimonials";
 import ContactForm from "./components/ContactForm";
 import ContactInfoWithMap from "./components/ContactInfoWithMap";
 import UpcomingEvents from "./components/UpcomingEvents";
-import CalendarPage from "./components/CalendarPage";
+import CalendarPage from "./components/CalendarPage"; // Make sure to import CalendarPage correctly
 import { auth } from "./services/firebase";
 import { signOutFromGoogle } from "./services/authService";
 import ServiceCard1 from "./pages/ServiceCard1";
@@ -24,11 +24,7 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-      }
+      setIsLoggedIn(!!user);
     });
 
     return () => unsubscribe();
@@ -71,7 +67,6 @@ function App() {
             }
           />
           <Route path="/calendar" element={<CalendarPage />} />
-
           <Route path="/serviceCard1" element={<ServiceCard1 />} />
           <Route path="/serviceCard2" element={<ServiceCard2 />} />
           <Route path="/serviceCard3" element={<ServiceCard3 />} />

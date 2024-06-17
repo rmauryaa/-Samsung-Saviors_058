@@ -1,6 +1,6 @@
 // src/services/authService.js
 import { signInWithPopup, GoogleAuthProvider, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
-import { doc, setDoc, getDocs, collection, query } from "firebase/firestore";
+import { doc, setDoc, getDocs, collection, query, updateDoc, deleteDoc } from "firebase/firestore";
 import { auth, db } from './firebase';
 
 const provider = new GoogleAuthProvider();
@@ -61,4 +61,22 @@ export const getTrips = async () => {
       date: new Date(data.date) // Ensure date is a Date object
     };
   });
+};
+
+export const updateTrip = async (date, tripDetails) => {
+  const user = auth.currentUser;
+  if (!user) throw new Error("User not authenticated");
+
+  const dateRef = doc(db, 'users', user.uid, 'trips', date.toISOString());
+  await updateDoc(dateRef, {
+    ...tripDetails
+  });
+};
+
+export const deleteTrip = async (date) => {
+  const user = auth.currentUser;
+  if (!user) throw new Error("User not authenticated");
+
+  const dateRef = doc(db, 'users', user.uid, 'trips', date.toISOString());
+  await deleteDoc(dateRef);
 };
