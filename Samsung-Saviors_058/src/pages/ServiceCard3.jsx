@@ -7,9 +7,12 @@ import {
   VStack,
   Container,
   Spacer,
+  Button,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const ServiceCard2 = () => {
+  const navigate = useNavigate();
   const days = [1, 2, 3, 4];
 
   return (
@@ -77,6 +80,9 @@ const ServiceCard2 = () => {
           </Grid>
         </Box>
       ))}
+      <Button colorScheme="teal" onClick={() => navigate("/")}>
+        Back to Home
+      </Button>
     </Container>
   );
 };

@@ -1,6 +1,6 @@
 // src/components/Dashboard.jsx
 import React from "react";
-import { Box, SimpleGrid, Heading, Center } from "@chakra-ui/react";
+import { Box, SimpleGrid, Heading, Center, Button } from "@chakra-ui/react";
 import { Pie, Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -11,6 +11,7 @@ import {
   CategoryScale,
   LinearScale,
 } from "chart.js";
+import { useNavigate } from "react-router-dom";
 
 ChartJS.register(
   ArcElement,
@@ -61,16 +62,25 @@ const barData = {
   ],
 };
 
-
 const ServiceCard1 = () => {
+  const navigate = useNavigate();
+
   return (
     <Box p={5} textAlign="center">
-
-    <Box display="flex" justifyContent="Center" p={5}>
-      <Heading as="h1" mb={5} mt={10} w="20%" textAlign="center" bg="#ecc94b" p={5} borderRadius={9}>
-        User Dashboard
-      </Heading>
-    </Box>
+      <Box display="flex" justifyContent="Center" p={5}>
+        <Heading
+          as="h1"
+          mb={5}
+          mt={10}
+          w="20%"
+          textAlign="center"
+          bg="#ecc94b"
+          p={5}
+          borderRadius={9}
+        >
+          User Dashboard
+        </Heading>
+      </Box>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
         <Box boxShadow="md" p="6" rounded="md" bg="white">
           <Heading as="h3" size="lg" mb={5}>
@@ -85,6 +95,10 @@ const ServiceCard1 = () => {
           <Bar data={barData} />
         </Box>
       </SimpleGrid>
+
+      <Button p={5} colorScheme="teal" onClick={() => navigate("/")}>
+        Back to Home
+      </Button>
     </Box>
   );
 };
