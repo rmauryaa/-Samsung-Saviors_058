@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Flex } from '@chakra-ui/react';
 import { useToast } from '@chakra-ui/react';
 import { signInWithGoogle, signOutFromGoogle } from '../services/authService';
+import { auth } from '../services/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const GoogleAuth = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const toast = useToast();
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsLoggedIn(!!user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const handleGoogleSignIn = async () => {
     try {
       const user = await signInWithGoogle();
       setIsLoggedIn(true);
-      // Display success toast message
       toast({
         title: "Successfully signed in",
         description: `Welcome, ${user.displayName}!`,
@@ -35,7 +44,6 @@ const GoogleAuth = () => {
     try {
       await signOutFromGoogle();
       setIsLoggedIn(false);
-      // Display success toast message
       toast({
         title: "Signed out",
         description: "You have successfully signed out.",

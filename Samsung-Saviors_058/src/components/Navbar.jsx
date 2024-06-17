@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Flex, HStack, Link, IconButton, useDisclosure, useColorModeValue } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import GoogleAuth from './GoogleAuth'; 
+import GoogleAuth from './GoogleAuth';
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
