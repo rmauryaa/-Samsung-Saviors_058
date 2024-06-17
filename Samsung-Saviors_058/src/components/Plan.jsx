@@ -35,9 +35,9 @@ const Plan = () => {
       />
       <Box
         position="absolute"
-        top="50%"
+        top="20%"
         right="5%"
-        transform="translateY(-50%)"
+        // transform="translateY(-50%)"
         width={{ base: "80%", md: "40%" }}
         height="auto"
         bg="rgba(255, 255, 255, 0.8)"
