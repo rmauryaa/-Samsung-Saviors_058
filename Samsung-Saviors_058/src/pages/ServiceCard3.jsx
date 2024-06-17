@@ -11,27 +11,47 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 // CSS style for blurred background
 const blurredBackground = {
   backgroundImage: `url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAy6cojeOJlnvET8UWGpOxyOA2j5Guboyp-Q&s')`,
-  backgroundSize: 'cover',
-  filter: 'blur(8px)',
-  position: 'fixed',
+  backgroundSize: "cover",
+  filter: "blur(8px)",
+  position: "fixed",
   top: 0,
   left: 0,
-  width: '100%',
-  height: '100%',
+  width: "100%",
+  height: "100%",
   zIndex: -1,
 };
 
 const ServiceCard3 = () => {
   const navigate = useNavigate();
-  const initialActivity = { startTime: "", endTime: "", activity: "", budget: "" };
+  const initialActivity = {
+    startTime: "",
+    endTime: "",
+    activity: "",
+    budget: "",
+  };
   const initialItinerary = [
     { day: 1, activities: [{ ...initialActivity }] },
     { day: 2, activities: [{ ...initialActivity }] },
@@ -55,12 +75,17 @@ const ServiceCard3 = () => {
 
   const deleteActivity = (dayIndex, activityIndex) => {
     const newItinerary = [...itinerary];
-    newItinerary[dayIndex].activities = newItinerary[dayIndex].activities.filter((_, i) => i !== activityIndex);
+    newItinerary[dayIndex].activities = newItinerary[
+      dayIndex
+    ].activities.filter((_, i) => i !== activityIndex);
     setItinerary(newItinerary);
   };
 
   const addNewDay = () => {
-    const newItinerary = [...itinerary, { day: itinerary.length + 1, activities: [{ ...initialActivity }] }];
+    const newItinerary = [
+      ...itinerary,
+      { day: itinerary.length + 1, activities: [{ ...initialActivity }] },
+    ];
     setItinerary(newItinerary);
   };
 
@@ -79,17 +104,23 @@ const ServiceCard3 = () => {
 
   const calculateTotalBudget = () => {
     return itinerary.reduce((total, day) => {
-      return total + day.activities.reduce((dayTotal, activity) => dayTotal + parseFloat(activity.budget || 0), 0);
+      return (
+        total +
+        day.activities.reduce(
+          (dayTotal, activity) => dayTotal + parseFloat(activity.budget || 0),
+          0
+        )
+      );
     }, 0);
   };
 
   const chartData = {
-    labels: itinerary.map(day => `Day ${day.day}`),
+    labels: itinerary.map((day) => `Day ${day.day}`),
     datasets: [
       {
-        label: 'Number of Activities',
-        data: itinerary.map(day => day.activities.length),
-        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+        label: "Number of Activities",
+        data: itinerary.map((day) => day.activities.length),
+        backgroundColor: "rgba(54, 162, 235, 0.6)",
       },
     ],
   };
@@ -101,20 +132,35 @@ const ServiceCard3 = () => {
         maxW="container.xl"
         p={10}
         borderRadius="md"
-        boxShadow="md"
-        bg="gray.100"
+        // boxShadow="md"
+        // bg="gray.100"
         position="relative"
         zIndex={0}
       >
-        <Box textAlign="center" mb={10} mt={9}>
-          <Text fontSize="4xl" fontWeight="bold" color="teal.600">
-            Itinerary
-          </Text>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="10vh"
+          mt={5}
+        >
+          <Box
+            textAlign="center"
+            bg="yellow"
+            w="20%"
+            borderRadius={5}
+            p={(4, 2)}
+          >
+            <Text fontSize="4xl" fontWeight="bold" color="black.600">
+              Itinerary
+            </Text>
+          </Box>
         </Box>
+
         {itinerary.map((day, dayIndex) => (
           <Box key={day.day} mb={10}>
             <HStack justify="space-between">
-              <Text fontSize="2xl" fontWeight="bold" mb={4} color="teal.500">
+              <Text fontSize="2xl" fontWeight="bold" mb={4} color="black.500">
                 Day {day.day}
               </Text>
               <Button colorScheme="red" onClick={() => deleteDay(dayIndex)}>
@@ -139,9 +185,17 @@ const ServiceCard3 = () => {
                       placeholder="Start Time"
                       value={item.startTime}
                       onChange={(e) =>
-                        handleInputChange(dayIndex, activityIndex, "startTime", e.target.value)
+                        handleInputChange(
+                          dayIndex,
+                          activityIndex,
+                          "startTime",
+                          e.target.value
+                        )
                       }
-                      readOnly={editMode.dayIndex !== dayIndex || editMode.activityIndex !== activityIndex}
+                      readOnly={
+                        editMode.dayIndex !== dayIndex ||
+                        editMode.activityIndex !== activityIndex
+                      }
                     />
                   </VStack>
                 </GridItem>
@@ -152,9 +206,17 @@ const ServiceCard3 = () => {
                       placeholder="End Time"
                       value={item.endTime}
                       onChange={(e) =>
-                        handleInputChange(dayIndex, activityIndex, "endTime", e.target.value)
+                        handleInputChange(
+                          dayIndex,
+                          activityIndex,
+                          "endTime",
+                          e.target.value
+                        )
                       }
-                      readOnly={editMode.dayIndex !== dayIndex || editMode.activityIndex !== activityIndex}
+                      readOnly={
+                        editMode.dayIndex !== dayIndex ||
+                        editMode.activityIndex !== activityIndex
+                      }
                     />
                   </VStack>
                 </GridItem>
@@ -165,9 +227,17 @@ const ServiceCard3 = () => {
                       placeholder="Activity"
                       value={item.activity}
                       onChange={(e) =>
-                        handleInputChange(dayIndex, activityIndex, "activity", e.target.value)
+                        handleInputChange(
+                          dayIndex,
+                          activityIndex,
+                          "activity",
+                          e.target.value
+                        )
                       }
-                      readOnly={editMode.dayIndex !== dayIndex || editMode.activityIndex !== activityIndex}
+                      readOnly={
+                        editMode.dayIndex !== dayIndex ||
+                        editMode.activityIndex !== activityIndex
+                      }
                     />
                   </VStack>
                 </GridItem>
@@ -178,24 +248,39 @@ const ServiceCard3 = () => {
                       placeholder="Budget"
                       value={item.budget}
                       onChange={(e) =>
-                        handleInputChange(dayIndex, activityIndex, "budget", e.target.value)
+                        handleInputChange(
+                          dayIndex,
+                          activityIndex,
+                          "budget",
+                          e.target.value
+                        )
                       }
-                      readOnly={editMode.dayIndex !== dayIndex || editMode.activityIndex !== activityIndex}
+                      readOnly={
+                        editMode.dayIndex !== dayIndex ||
+                        editMode.activityIndex !== activityIndex
+                      }
                     />
                   </VStack>
                 </GridItem>
                 <GridItem>
                   <VStack spacing={4} align="stretch" mt="40px">
-                    {editMode.dayIndex === dayIndex && editMode.activityIndex === activityIndex ? (
+                    {editMode.dayIndex === dayIndex &&
+                    editMode.activityIndex === activityIndex ? (
                       <Button colorScheme="green" onClick={saveActivity}>
                         Save
                       </Button>
                     ) : (
-                      <Button colorScheme="blue" onClick={() => startEditing(dayIndex, activityIndex)}>
+                      <Button
+                        colorScheme="blue"
+                        onClick={() => startEditing(dayIndex, activityIndex)}
+                      >
                         Edit
                       </Button>
                     )}
-                    <Button colorScheme="red" onClick={() => deleteActivity(dayIndex, activityIndex)}>
+                    <Button
+                      colorScheme="red"
+                      onClick={() => deleteActivity(dayIndex, activityIndex)}
+                    >
                       Delete
                     </Button>
                   </VStack>
@@ -211,11 +296,11 @@ const ServiceCard3 = () => {
           Add Day
         </Button>
         <Box textAlign="center" mt={10}>
-          <Text fontSize="2xl" fontWeight="bold" color="teal.600">
+          <Text fontSize="2xl" fontWeight="bold" color="black.600">
             Total Budget: ${calculateTotalBudget().toFixed(2)}
           </Text>
         </Box>
-        <Box mt={10}>
+        <Box mt={10} bg="gray.100" p={5}>
           <Bar data={chartData} />
         </Box>
         <Button colorScheme="teal" mt={4} onClick={() => navigate("/")}>
