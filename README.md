@@ -10,7 +10,42 @@ The application is deployed at [Weekend Planner](https://my-weekend-planner.netl
 ---
 <h2 align="center">File Structure</h1>
 
-
+.
+├── node_modules
+├── public
+├── src
+│ ├── components
+│ │ ├── AboutUs.jsx
+│ │ ├── CalendarPage.jsx
+│ │ ├── ContactForm.jsx
+│ │ ├── ContactInfoWithMap.jsx
+│ │ ├── GoogleAuth.jsx
+│ │ ├── GroupSchedule.jsx
+│ │ ├── HeroSection.jsx
+│ │ ├── Navbar.jsx
+│ │ ├── Plan.jsx
+│ │ ├── Testimonials.jsx
+│ │ ├── UpcomingEvents.jsx
+│ │ ├── Widget.jsx
+│ ├── pages
+│ │ ├── ServiceCard1.jsx
+│ │ ├── ServiceCard2.jsx
+│ │ ├── ServiceCard3.jsx
+│ ├── services
+│ │ ├── authService.js
+│ │ ├── firebase.js
+│ ├── styles
+│ │ ├── CalendarPage.css
+│ │ ├── Dashboard.css
+│ ├── utils
+│ │ ├── calendarUtils.js
+│ ├── App.css
+│ ├── App.jsx
+│ ├── google.jsx
+│ ├── index.css
+│ ├── main.jsx
+├── .eslint.cjs
+├── .gitignore
 
 <h2 align="center">Important Pages</h1>
 
