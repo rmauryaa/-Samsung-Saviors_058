@@ -8,44 +8,6 @@ This is a React application for planning and managing weekend trips. The applica
 The application is deployed at [Weekend Planner](https://my-weekend-planner.netlify.app/).
 
 ---
-<h2 align="center">File Structure</h1>
-
-.
-├── node_modules
-├── public
-├── src
-│ ├── components
-│ │ ├── AboutUs.jsx
-│ │ ├── CalendarPage.jsx
-│ │ ├── ContactForm.jsx
-│ │ ├── ContactInfoWithMap.jsx
-│ │ ├── GoogleAuth.jsx
-│ │ ├── GroupSchedule.jsx
-│ │ ├── HeroSection.jsx
-│ │ ├── Navbar.jsx
-│ │ ├── Plan.jsx
-│ │ ├── Testimonials.jsx
-│ │ ├── UpcomingEvents.jsx
-│ │ ├── Widget.jsx
-│ ├── pages
-│ │ ├── ServiceCard1.jsx
-│ │ ├── ServiceCard2.jsx
-│ │ ├── ServiceCard3.jsx
-│ ├── services
-│ │ ├── authService.js
-│ │ ├── firebase.js
-│ ├── styles
-│ │ ├── CalendarPage.css
-│ │ ├── Dashboard.css
-│ ├── utils
-│ │ ├── calendarUtils.js
-│ ├── App.css
-│ ├── App.jsx
-│ ├── google.jsx
-│ ├── index.css
-│ ├── main.jsx
-├── .eslint.cjs
-├── .gitignore
 
 <h2 align="center">Important Pages</h1>
 
@@ -153,10 +115,35 @@ This component allows users to create and manage a detailed itinerary for their 
 - Manage your trips, including sorting, searching, editing, and deleting trips.
 - Create and manage detailed itineraries for your trips.
 
+<h2 align="center">Features</h1>
+
+
+- **User Authentication**: Secure login and registration system.
+- **Data Visualization**: Visualize your weekend plans with interactive charts.
+- **Responsive Design**: Works on desktop, tablet, and mobile devices.
+- **Calendar Integration**: Easily manage and view your plans on a calendar interface.
+- **Google Maps Integration**: Visualize your destinations on a map.
+- **Group Scheduling**: Plan trips with multiple participants.
+- **Testimonials**: Read and write reviews about trips.
+- **Upcoming Events**: Stay informed about upcoming events.
+
+
+
 
 <h2 align="center">Acknowledgements</h1>
 
+- React
 - Chakra UI for the UI components
 - Firebase for backend services
 - Chart.js for data visualization
 
+<h2 align="center">Author</h1>
+
+- **GitHub**: [Soumyadeep Dutta](https://github.com/soumyadeepdutta7)
+- **LinkedIn**: [Soumyadeep Dutta](https://www.linkedin.com/in/soumyadeep-dutta-b142581a1/)
+
+- **GitHub**: [Rajnikantkeshkar](https://github.com/Rajnikantkeshkar)
+- **LinkedIn**: [Rajnikant Katwaru Keshkar	](https://www.linkedin.com/in/rajnikant-keshkar-707239262/)
+
+- **GitHub**: [Rahul Maurya](https://github.com/rmauryaa)
+- **LinkedIn**: [Rahul Maurya	](https://www.linkedin.com/in/rmaurya/)
