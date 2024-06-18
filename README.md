@@ -1,31 +1,18 @@
-<center>
-
-# Weekend Planner
-
-</center>
+<h1 align="center">Weekend Planner</h1>
 
 This is a React application for planning and managing weekend trips. The application features user authentication, data visualization, and a user-friendly interface for trip planning and management.
 
 ---
-<center>
-
-## Deployment
-
-</center>
+<h2 align="center">Deployment</h1>
 
 The application is deployed at [Weekend Planner](https://my-weekend-planner.netlify.app/).
 
 ---
-
-## File Structure
-
-
-<center>
+<h2 align="center">File Structure</h1>
 
 
-## Important Pages
 
-</center>
+<h2 align="center">Important Pages</h1>
 
 ### Plan.jsx
 
@@ -87,12 +74,7 @@ This component allows users to create and manage a detailed itinerary for their 
   - Calculates and displays the total budget for the trip.
   - Visualizes the number of activities per day using a bar chart.
 
-<center>
-
-
-## Getting Started
-
-</center>
+<h2 align="center"> Getting Started</h1>
 
 ### Prerequisites
 
@@ -103,15 +85,15 @@ This component allows users to create and manage a detailed itinerary for their 
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-repository/weekend-planner.git
+    git clone https://github.com/Hari3199/-Samsung-Saviors_058.git
     ```
 2. Navigate to the project directory:
     ```bash
-    cd weekend-planner
+    cd -Samsung-Saviors_058.git
     ```
 3. Install dependencies:
     ```bash
-    npm install
+    npm run dev
     ```
 
 ### Firebase Configuration
@@ -128,12 +110,7 @@ This component allows users to create and manage a detailed itinerary for their 
 
 2. Open your browser and navigate to `http://localhost:3000`.
 
-<center>
-
-
-## Usage
-
-</center>
+<h2 align="center">Usage</h1>
 
 - Sign in to access trip planning and management features.
 - Use the "Plan Your Ideal Weekend" section to start planning your trips.
@@ -142,8 +119,7 @@ This component allows users to create and manage a detailed itinerary for their 
 - Create and manage detailed itineraries for your trips.
 
 
-
-## Acknowledgements
+<h2 align="center">Acknowledgements</h1>
 
 - Chakra UI for the UI components
 - Firebase for backend services
