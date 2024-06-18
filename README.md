@@ -9,36 +9,36 @@ The application is deployed at [Weekend Planner](https://my-weekend-planner.netl
 
 ---
 ## Directory Structure
-
 Samsung-Saviors_058/
 ├── public/
 ├── src/
-├── components/
-│ ├── AboutUs.jsx
-│ ├── CalendarPage.jsx
-│ ├── ContactForm.jsx
-│ ├── ContactInfoWithMap.jsx
-│ ├── GoogleAuth.jsx
-│ ├── GroupSchedule.jsx
-│ ├── HeroSection.jsx
-│ ├── Navbar.jsx
-│ ├── Plan.jsx
-│ ├── Testimonials.jsx
-│ ├── UpcomingEvents.jsx
-│ ├── Widget.jsx
-├── images/
-├── pages/
-│ ├── ServiceCard1.jsx
-│ ├── ServiceCard2.jsx
-│ ├── ServiceCard3.jsx
-├── services/
-│ ├── authService.js
-│ ├── firebase.js
-├── styles/
-│ ├── CalendarPage.css
-│ ├── Dashboard.css
-├── utils/
-├── App.css
+│ ├── components/
+│ │ ├── AboutUs.jsx
+│ │ ├── CalendarPage.jsx
+│ │ ├── ContactForm.jsx
+│ │ ├── ContactInfoWithMap.jsx
+│ │ ├── GoogleAuth.jsx
+│ │ ├── GroupSchedule.jsx
+│ │ ├── HeroSection.jsx
+│ │ ├── Navbar.jsx
+│ │ ├── Plan.jsx
+│ │ ├── Testimonials.jsx
+│ │ ├── UpcomingEvents.jsx
+│ │ ├── Widget.jsx
+│ ├── images/
+│ ├── pages/
+│ │ ├── ServiceCard1.jsx
+│ │ ├── ServiceCard2.jsx
+│ │ ├── ServiceCard3.jsx
+│ ├── services/
+│ │ ├── authService.js
+│ │ ├── firebase.js
+│ ├── styles/
+│ │ ├── CalendarPage.css
+│ │ ├── Dashboard.css
+│ ├── utils/
+│ ├── App.css
+
 
 <h2 align="center">Important Pages</h2>
 
